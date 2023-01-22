@@ -1,1 +1,1 @@
-web: gunicorn 'Estate_Api.wsgi'
+web: gunicorn Estate_Api.wsgi
