@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import  PostModelSerializer
-from ..models import baza_ogloszen
+from .serializers import  PostModelSerializer,Link_oto_dom_Serializer
+from ..models import baza_ogloszen,linki_otodom
 from django.utils import timezone
 import datetime
 import sys
@@ -26,6 +26,23 @@ def ogl_list(request):
                                      foto=request.data['foto'],
                                      data_wystawienia=datetime.datetime.now(tz=timezone.utc),
                                      data_zakonczenia=None)
+        if serializer.is_valid():
+            return Response(serializer.data,status=status.HTTP_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','POST'])
+def linki_oto(request):
+    if request.method == 'GET':
+        qs = linki_otodom.objects.all()
+        serializer = Link_oto_dom_Serializer(qs,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = Link_oto_dom_Serializer(data = request.data)
+        print('coś działa')
+        sys.stdout.flush()
+        linki_otodom.objects.create(tytul_linka=request.data['tytul_linka'], url_linka=request.data['url_linka'],
+                                     )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)

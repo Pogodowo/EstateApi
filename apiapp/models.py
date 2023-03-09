@@ -13,3 +13,10 @@ class baza_ogloszen(models.Model):
     data_zakonczenia = models.DateTimeField(null=True,blank=True)
     def __str__(self):
         return self.tytul
+
+class linki_otodom(models.Model):
+    tytul_linka = models.CharField(max_length=80, null=True, blank=True)
+    url_linka = models.TextField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.tytul_linka
+
