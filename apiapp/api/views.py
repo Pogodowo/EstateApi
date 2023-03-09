@@ -23,6 +23,7 @@ def ogl_list(request):
                                      lokalizacja=request.data['lokalizacja'], powierzchnia=request.data['powierzchnia'],
                                      cena=request.data['cena'], cena_za_metr=request.data['cena_za_metr'],
                                      liczba_pokoi=request.data['liczba_pokoi'],
+                                     foto=request.data['foto'],
                                      data_wystawienia=datetime.datetime.now(tz=timezone.utc),
                                      data_zakonczenia=None)
         if serializer.is_valid():
