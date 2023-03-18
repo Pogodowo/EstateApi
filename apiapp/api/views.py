@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import  PostModelSerializer,Link_oto_dom_Serializer
-from ..models import baza_ogloszen,linki_otodom
+from .serializers import  PostModelSerializer,Link_oto_dom_Serializer,TestAktywnosciSerializer
+from ..models import baza_ogloszen,linki_otodom,test_aktywnosci
 from django.utils import timezone
 import datetime
 import sys
@@ -42,6 +42,23 @@ def linki_oto(request):
         print('coś działa')
         sys.stdout.flush()
         linki_otodom.objects.create(tytul_linka=request.data['tytul_linka'], url_linka=request.data['url_linka'],
+                                     )
+        if serializer.is_valid():
+            return Response(serializer.data,status=status.HTTP_CREATED)
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','POST'])
+def test_aktywnosci_view(request):
+    if request.method == 'GET':
+        qs = test_aktywnosci.objects.all()
+        serializer = TestAktywnosciSerializer(qs,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = TestAktywnosciSerializer(data = request.data)
+        print('coś działa')
+        sys.stdout.flush()
+        test_aktywnosci.objects.create(aktywnosc_skryptu=request.data['aktywnosc_skryptu']
                                      )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)

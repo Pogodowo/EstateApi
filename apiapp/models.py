@@ -21,7 +21,7 @@ class linki_otodom(models.Model):
         return self.tytul_linka
 
 class test_aktywnosci(models.Model):
-    data_wystawienia = models.DateTimeField(null=True, blank=True)
+    aktywnosc_skryptu = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.data_wystawienia
 
