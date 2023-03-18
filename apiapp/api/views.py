@@ -58,7 +58,7 @@ def test_aktywnosci_view(request):
         serializer = TestAktywnosciSerializer(data = request.data)
         print('coś działa')
         sys.stdout.flush()
-        test_aktywnosci.objects.create(aktywnosc_skryptu=request.data['aktywnosc_skryptu']
+        test_aktywnosci.objects.create(status_skryptu=request.data['status_skryptu'],aktywnosc_skryptu=datetime.datetime.now(tz=timezone.utc)
                                      )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)

@@ -21,6 +21,7 @@ class linki_otodom(models.Model):
         return self.tytul_linka
 
 class test_aktywnosci(models.Model):
+    status_skryptu= models.CharField(max_length=20,null=True,blank=True)
     aktywnosc_skryptu = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.data_wystawienia

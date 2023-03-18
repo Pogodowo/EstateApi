@@ -16,4 +16,4 @@ class Link_oto_dom_Serializer(serializers.ModelSerializer):
 class TestAktywnosciSerializer(serializers.ModelSerializer):
     class Meta:
         model=test_aktywnosci
-        fields =['aktywnosc_skryptu',]
+        fields =['aktywnosc_skryptu',"status_skryptu"]
