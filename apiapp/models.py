@@ -20,3 +20,8 @@ class linki_otodom(models.Model):
     def __str__(self):
         return self.tytul_linka
 
+class test_aktywnosci(models.Model):
+    data_wystawienia = models.DateTimeField(null=True, blank=True)
+    def __str__(self):
+        return self.data_wystawienia
+
