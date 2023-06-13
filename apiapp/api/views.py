@@ -25,7 +25,7 @@ def ogl_list(request):
                                      liczba_pokoi=request.data["liczba_pokoi"],
                                      foto=request.data["foto"],
                                      data_wystawienia=datetime.datetime.now(tz=timezone.utc),
-                                     data_zakonczenia="None")
+                                     )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
