@@ -19,13 +19,13 @@ def ogl_list(request):
         serializer = PostModelSerializer(data = request.data)
         print('coś działa')
         sys.stdout.flush()
-        baza_ogloszen.objects.create(tytul=request.data['tytul'], url_link=request.data['url_link'],
-                                     lokalizacja=request.data['lokalizacja'], powierzchnia=request.data['powierzchnia'],
-                                     cena=request.data['cena'], cena_za_metr=request.data['cena_za_metr'],
-                                     liczba_pokoi=request.data['liczba_pokoi'],
-                                     foto=request.data['foto'],
+        baza_ogloszen.objects.create(tytul=request.data["tytul"], url_link=request.data["url_link"],
+                                     lokalizacja=request.data["lokalizacja"], powierzchnia=request.data["powierzchnia"],
+                                     cena=request.data["cena"], cena_za_metr=request.data["cena_za_metr"],
+                                     liczba_pokoi=request.data["liczba_pokoi"],
+                                     foto=request.data["foto"],
                                      data_wystawienia=datetime.datetime.now(tz=timezone.utc),
-                                     data_zakonczenia=None)
+                                     data_zakonczenia="None")
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
