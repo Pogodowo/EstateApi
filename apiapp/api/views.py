@@ -29,8 +29,8 @@ def ogl_list(request):
                                      cena=request.data["cena"], cena_za_metr=request.data["cena_za_metr"],
                                      liczba_pokoi=request.data["liczba_pokoi"],
                                      foto=request.data["foto"],
-                                     data_wystawienia=datetime.datetime.now(tz=timezone.utc),
-                                     ulubione='off'
+                                     data_wystawienia=datetime.datetime.now(tz=timezone.utc)
+
                                      )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
