@@ -1,5 +1,9 @@
+#############################################################
+from rest_framework import generics, mixins
+from rest_framework.decorators import api_view
+##########################################################
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +13,7 @@ from django.utils import timezone
 import datetime
 import sys
 
-@api_view(['GET','POST'])
+@api_view(['GET','POST','PUT'])
 def ogl_list(request):
     if request.method == 'GET':
         qs = baza_ogloszen.objects.all()
@@ -28,8 +32,45 @@ def ogl_list(request):
                                      )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
+
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
+#############################PUT#####################################################################################
+# @api_view(['GET','PUT'])
+# def update_element(request,pk):
+#     try:
+#         snippet = baza_ogloszen.objects.get(pk=pk)
+#     except baza_ogloszen.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+#     if request.method == 'PUT':
+#         serializer = PostModelSerializer(snippet, data=request.data)
+#         data.tytul=("zaktyalizowałem coć")
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     return HttpResponse("nie działa")
+
+class OglUpdateAPIView(
+    UserQuerySetMixin,
+    StaffEditorPermissionMixin,
+    generics.UpdateAPIView):
+    queryset = baza_ogloszen.objects.all()
+    serializer_class = PostModelSerializer
+    lookup_field = 'pk'
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+
+            ##
+
+ogl_update_view = OglAPIView.as_view()
+
+    ###################dotąd rzeźbię##############################################
+
+
+
+#######################################################################################################################
 
 @api_view(['GET','POST'])
 def linki_oto(request):

@@ -11,6 +11,8 @@ class baza_ogloszen(models.Model):
     foto = models.TextField(max_length=200, null=True, blank=True)
     data_wystawienia = models.DateTimeField(null=True,blank=True)
     data_zakonczenia = models.DateTimeField(null=True,blank=True)
+    id = models.AutoField(primary_key=True)
+    ulubione=models.CharField(max_length=3,default='off')
     def __str__(self):
         return self.tytul
 

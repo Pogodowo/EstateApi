@@ -48,7 +48,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -129,7 +128,8 @@ USE_TZ = True
 #CORS_ALLOW_ALL_ORIGINS: True
 CORS_ALLOWED_ORIGINS = [
     'https://web-production-97d52.up.railway.app',
-    'http://localhost:3000/'
+    'http://localhost:3000',
+    'http://localhost:8000'
 ]
 
 STATIC_URL = '/static/'
