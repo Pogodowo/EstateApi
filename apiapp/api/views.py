@@ -14,7 +14,7 @@ from django.utils import timezone
 import datetime
 import sys
 
-@api_view(['GET','POST','PUT'])
+@api_view(['GET','POST'])
 def ogl_list(request):
     if request.method == 'GET':
         qs = baza_ogloszen.objects.all()
