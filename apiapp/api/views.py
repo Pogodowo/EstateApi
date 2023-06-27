@@ -29,6 +29,7 @@ def ogl_list(request):
                                      liczba_pokoi=request.data["liczba_pokoi"],
                                      foto=request.data["foto"],
                                      data_wystawienia=datetime.datetime.now(tz=timezone.utc),
+                                     ulubione='off'
                                      )
         if serializer.is_valid():
             return Response(serializer.data,status=status.HTTP_CREATED)
