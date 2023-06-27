@@ -1,7 +1,7 @@
 
 
 from django.urls import path
-from .views import ogl_list,linki_oto,test_aktywnosci_view,update_element,ogl_update_view
+from .views import ogl_list,linki_oto,test_aktywnosci_view,ogl_update_view
 
 urlpatterns = [
     path('ogloszenia/', ogl_list),

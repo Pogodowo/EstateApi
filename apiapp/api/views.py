@@ -1,6 +1,7 @@
 #############################################################
 from rest_framework import generics, mixins
 from rest_framework.decorators import api_view
+
 ##########################################################
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -53,8 +54,6 @@ def ogl_list(request):
 #     return HttpResponse("nie działa")
 
 class OglUpdateAPIView(
-    UserQuerySetMixin,
-    StaffEditorPermissionMixin,
     generics.UpdateAPIView):
     queryset = baza_ogloszen.objects.all()
     serializer_class = PostModelSerializer
@@ -65,7 +64,7 @@ class OglUpdateAPIView(
 
             ##
 
-ogl_update_view = OglAPIView.as_view()
+ogl_update_view = OglUpdateAPIView.as_view()
 
     ###################dotąd rzeźbię##############################################
 
