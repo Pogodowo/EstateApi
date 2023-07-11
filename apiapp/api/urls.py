@@ -7,5 +7,5 @@ urlpatterns = [
     path('ogloszenia/', ogl_list),
     path('linki_oto/', linki_oto),
     path('aktywnosc/', test_aktywnosci_view),
-    path('ogloszenia/<int:pk>/', ogl_update_view),
+    path('ogloszenia/<int:pk>', ogl_update_view),
 ]

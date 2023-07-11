@@ -12,6 +12,8 @@ from .serializers import  PostModelSerializer,Link_oto_dom_Serializer,TestAktywn
 from ..models import baza_ogloszen,linki_otodom,test_aktywnosci
 from django.utils import timezone
 import datetime
+from django.http import HttpResponse,Http404
+from rest_framework.views import APIView
 import sys
 
 @api_view(['GET','POST'])
@@ -38,33 +40,36 @@ def ogl_list(request):
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
 #############################PUT#####################################################################################
-# @api_view(['GET','PUT'])
-# def update_element(request,pk):
-#     try:
-#         snippet = baza_ogloszen.objects.get(pk=pk)
-#     except baza_ogloszen.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'PUT':
-#         serializer = PostModelSerializer(snippet, data=request.data)
-#         data.tytul=("zaktyalizowałem coć")
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     return HttpResponse("nie działa")
 
-class OglUpdateAPIView(
-    generics.UpdateAPIView):
-    queryset = baza_ogloszen.objects.all()
-    serializer_class = PostModelSerializer
-    lookup_field = 'pk'
+class ogl_update_view(APIView):
 
-    def perform_update(self, serializer):
-        instance = serializer.save()
+    def get_object(self,pk):
+        try:
+            return baza_ogloszen.objects.get(id=pk)
+        except baza_ogloszen.DoesNotExists:
+            raise Http404
 
-            ##
+    def get (self ,request,pk, format=None):
+        obj=self.get_object(pk)
+        serializer=PostModelSerializer(obj)
+        return Response(serializer.data)
+    def put (self,request,pk, format=None):
+        sys.stdout.flush()
+        snippet=self.get_object(pk)
+        print(snippet.model)
+        serializer=PostModelSerializer(snippet,data=request.data)
+        print('serializer',serializer)
+        if serializer.is_valid():
+            print('serializer.is_valid()')
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def delete (self,request,pk,format=None):
+        obj=self.get_object(pk)
+        obj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-ogl_update_view = OglUpdateAPIView.as_view()
+
 
     ###################dotąd rzeźbię##############################################
 
