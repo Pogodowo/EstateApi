@@ -56,11 +56,11 @@ class ogl_update_view(APIView):
     def put (self,request,pk, format=None):
         sys.stdout.flush()
         snippet=self.get_object(pk)
-        print(snippet.model)
         serializer=PostModelSerializer(snippet,data=request.data)
-        print('serializer',serializer)
+
+        print("request.data",request.data)
+        print("pk", pk)
         if serializer.is_valid():
-            print('serializer.is_valid()')
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
