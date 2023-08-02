@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('apiapp.urls')),
     path('api/',include('apiapp.api.urls')),
+    path('user/',include('user_api.urls')),
 
 ]

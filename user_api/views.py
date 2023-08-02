@@ -37,7 +37,7 @@ class UserLogout(APIView):
         return Response(status=status.HTTP_200_OK)
 
 class UserView(APIView):
-    permissions_classes =  (permissions.isAuhenticated,)
+    permissions_classes =  (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
     def get(self, request):
         serializer = UserSerializer(request.user)
