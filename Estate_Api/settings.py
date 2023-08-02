@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apiapp',
     "corsheaders",
+
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,11 @@ WSGI_APPLICATION = 'Estate_Api.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+## User model
 
+
+# Password validation
+# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
