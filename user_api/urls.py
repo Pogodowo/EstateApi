@@ -1,5 +1,5 @@
 from django.urls import path
-from . omport views
+from . import views
 
 from . import views
 urlpatterms=[
