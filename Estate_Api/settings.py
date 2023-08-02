@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apiapp',
     "corsheaders",
+    "user_api.apps.UserApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,20 @@ WSGI_APPLICATION = 'Estate_Api.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+## User model
+AUTH_USER_MODEL = 'user_api.AppUser'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
+
+# Password validation
+# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

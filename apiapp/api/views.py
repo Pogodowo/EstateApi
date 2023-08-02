@@ -58,8 +58,7 @@ class ogl_update_view(APIView):
         snippet=self.get_object(pk)
         serializer=PostModelSerializer(snippet,data=request.data)
 
-        print("request.data",request.data)
-        print("pk", pk)
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
